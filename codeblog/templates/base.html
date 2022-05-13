@@ -48,13 +48,13 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="/home">home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
+            <a class="nav-link" href="#">articles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Projects</a>
+            <a class="nav-link" href="#">categories</a>
           </li>
         </ul>
         <!-- Left links -->
@@ -96,6 +96,13 @@
             </li>
           </ul>
         </div>
+        <div class="d-flex align-items-center">
+            <a href="/login"><button type="button" class="btn btn-link px-3 me-2">
+              Login
+            </button></a>
+            <a href="/sign_up"><button type="button" class="btn btn-primary me-3">
+              Sign up for free
+            </button></a></div>
         <!-- Avatar -->
         <div class="dropdown">
           <a
@@ -135,11 +142,11 @@
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-
+<div class="container-fluid">
     {% block content %}
 
     {% endblock %}
-
+</div>
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
