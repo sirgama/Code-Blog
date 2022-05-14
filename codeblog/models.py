@@ -15,6 +15,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(20), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
+    blog = db.relationship('Blog', backref='author', lazy=True)
+    comment = db.relationship('Comment', backref='user', lazy='dynamic')
 
 
 
@@ -26,4 +28,14 @@ class Blog(db.Model):
     category = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    comment = db.relationship('Comment', backref='blog', lazy='dynamic')
+
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) 
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
+    comment = db.Column(db.String(100))
+
     
