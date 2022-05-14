@@ -2,9 +2,11 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_ckeditor import CKEditor
 
 
 app = Flask(__name__)
+ckeditor = CKEditor(app)
 app.config['SECRET_KEY'] = "234345erg5dfg3s654graw^$dr"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblog.db'
 
