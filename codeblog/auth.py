@@ -37,7 +37,7 @@ def sign_up():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-        password1 = request.form.get('password1')
+        password2 = request.form.get('password2')
         
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
@@ -47,16 +47,16 @@ def sign_up():
         elif username_exists:
             flash('username already exists', category='danger')
             
-        elif password != password1:
+        elif password != password2:
             flash('Passwords dont match', category='danger')
             
         else:
             new_user = User(username=username, email=email, password=password)
             db.session.commit(new_user)
             db.session.commit()
-            login_user(new_user, remember=True)
+            
             flash('Account Created', category='success')
-            return redirect(url_for('views.home'))
+            return redirect(url_for('views.login'))
             
         
     return render_template('signup.html')
