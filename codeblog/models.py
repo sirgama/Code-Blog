@@ -17,9 +17,13 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     blog = db.relationship('Blog', backref='author', lazy=True)
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
+    
 
 
 
+
+    def __repr__(self):
+            return f"User('{self.username}', '{self.email}', '{self.image_file}')"
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,8 +33,11 @@ class Blog(db.Model):
     content = db.Column(db.Text, nullable=False )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comment = db.relationship('Comment', backref='blog', lazy='dynamic')
+    
 
 
+    def __repr__(self):
+            return f"Blog('{self.title}', '{self.date_posted}')"
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,4 +45,7 @@ class Comment(db.Model):
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
     comment = db.Column(db.String(100))
 
+    def __repr__(self):
+            return f"Comment('{self.comment}')"
+        
     
