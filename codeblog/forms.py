@@ -14,12 +14,20 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Join CodeBlog!')
     
     
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError('Username already taken. Kindly use another name!')
+        
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError('Email is already taken, Please use another email!')
+    
+    
 class LoginForm(FlaskForm):
     
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    
     remember = BooleanField('Remember me')
-    
-   
     submit = SubmitField('Login')
