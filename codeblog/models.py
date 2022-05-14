@@ -17,6 +17,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     blog = db.relationship('Blog', backref='author', lazy=True)
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
+    likes =  db.relationship('Like',backref='user',lazy='dynamic')
+    dislikes =  db.relationship('Dislike',backref='user',lazy='dynamic')
     
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
@@ -44,7 +46,8 @@ class Blog(db.Model):
     content = db.Column(db.Text, nullable=False )
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     comment = db.relationship('Comment', backref='blog', lazy='dynamic')
-    
+    likes =  db.relationship('Like',backref='blog',lazy='dynamic')
+    dislikes =  db.relationship('Dislike',backref='blog',lazy='dynamic')
 
 
     def __repr__(self):
