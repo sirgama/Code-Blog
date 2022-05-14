@@ -67,3 +67,9 @@ class CommentForm(FlaskForm):
     
     comment = TextAreaField('Write a comment...',validators=[DataRequired()])
     submit = SubmitField('Post')
+    
+class BlogForm(FlaskForm):
+    title = StringField('Blog Title', validators=[DataRequired()])
+    category = SelectField('Blog Category', choices=[('Coding','Coding'),('Resources','Resources'),('Trends','Trends'),('Code & Money','Code & Money')],validators=[DataRequired()])
+    content = TextAreaField('Blog Content', validators=[DataRequired()])
+    submit = SubmitField('Go Live')
