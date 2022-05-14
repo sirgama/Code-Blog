@@ -60,3 +60,13 @@ class Comment(db.Model):
             return f"Comment('{self.comment}')"
         
     
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
+   
+
+class Dislike(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
