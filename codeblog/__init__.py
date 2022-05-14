@@ -5,8 +5,8 @@ from flask_mail import Mail
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "hello-world"
-app.config['SQL_ALCHEMY_DATABASE_URI'] = 'sqlite:///codeblog.db'
+app.config['SECRET_KEY'] = "234345erg5dfg3s654graw^$dr"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///codeblog.db'
 
 
 db = SQLAlchemy(app)

@@ -1,7 +1,7 @@
 from flask  import abort, render_template, redirect, url_for, flash, request
 from codeblog import app, db, mail
 from codeblog.models import User
-from flask_login import login_required, logout_user, login_user
+from flask_login import login_required, logout_user, login_user, current_user
 
 
 
@@ -25,5 +25,5 @@ def sign_up():
 @app.route("/logout")
 @login_required
 def logout():
-    logout_user()
+   
     return redirect(url_for('home'))
