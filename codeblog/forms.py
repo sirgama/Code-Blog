@@ -6,3 +6,9 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from codeblog.models import User
 
 
+class RegistrationForm(FlaskForm):
+    username = StringField('First Name', validators=[DataRequired(), Length(min=2, max=25)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Join CodeBlog!')
