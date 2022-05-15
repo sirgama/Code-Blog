@@ -156,7 +156,7 @@ def new_blog():
 
 @app.route('/blog/<int:blog_id>/update',methods=['GET', 'POST'])
 @login_required
-def update_pitch(blog_id):
+def update_blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     if blog.author != current_user:
         abort(403)
@@ -176,6 +176,6 @@ def update_pitch(blog_id):
 
 @app.route('/blog/<int:blog_id>')
 @login_required
-def pitch(blog_id):
+def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     return render_template('blog.html', blog=blog)

@@ -1,5 +1,45 @@
-{% extends 'base.html' %} 
-{% block title %}{% endblock %} 
+{% extends 'base.html' %}
+
 {% block content %}
-<h1>blog</h1>
+<div class="container">
+    <div class="row">
+
+<div class="col-md-8">
+    
+    <div class="card mb-4 mt-2 ">
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <p class="card-text">
+            {{blog.content}}.
+          </p>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="row">
+            {% if blog.author == current_user %}
+            <div class="col"><a class="btn btn-info btn-sm m-2" href="{{url_for('update_blog', blog_id=blog.id)}}">Update</a></div>
+            <div class="col">
+                <form action="{{url_for('delete_blog', blog_id=blog.id)}}" method="POST">
+                    <input class="btn btn-danger btn-sm m-2" type="submit" value="Delete">
+                   
+                </form>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+
+   
+</div>
+
+
+    </div>
+</div>
 {% endblock %}
