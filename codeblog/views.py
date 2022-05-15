@@ -154,5 +154,23 @@ def new_blog():
         return redirect(url_for('home'))
     return render_template('create_blog.html', title='New Blog', form=form, legend='New-Blog')
 
-
+@app.route('/blog/<int:blog_id>/update',methods=['GET', 'POST'])
+@login_required
+def update_pitch(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    if blog.author != current_user:
+        abort(403)
+        
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.content = form.content.data
+        db.session.commit()
+        flash('Blog Updated', 'success')
+        return redirect(url_for('blog', blog_id=blog.id))
+    elif request.method == "GET":
+        form.title.data = blog.title
+        form.content.data = blog.content
+    return render_template('create_blog.html', form=form, legend='Update Blog')
+    
 
