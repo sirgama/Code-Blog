@@ -80,3 +80,21 @@ def request_reset():
     
     return render_template('reset_request.html', title='Request Password', form=form)
 
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('Expired or invalid Token!', 'warning')
+        return redirect(url_for('reset_request'))
+    
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        password = form.password.data
+        db.session.commit(password)
+        flash('Password Reset Successfully, You can now login to access account features!', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('reset_token.html', title='Request Password', form=form)
