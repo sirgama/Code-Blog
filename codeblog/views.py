@@ -97,4 +97,4 @@ def reset_token(token):
         flash('Password Reset Successfully, You can now login to access account features!', 'success')
         return redirect(url_for('login'))
     
-    return render_template('reset_token.html', title='Request Password', form=form)
+    return render_template('token_reset.html', title='Request Password', form=form)
