@@ -51,3 +51,32 @@ def sign_up():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password reset request', sender='minutepitcher@gmail.com', recipients=[user.email])
+    
+    msg.body = f''' To Reset Your Password,visit the following link:
+    
+    { url_for('reset_token', token=token, _external=True) } 
+    
+    If you did not make this request, ignore this mail and no changes will be made
+    
+    '''
+    mail.send(msg)
+    
+    
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def request_reset():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An Email has been sent with instructions on how to reset your password. Check Your Spam as well!', 'info')
+    
+    return render_template('reset_request.html', title='Request Password', form=form)
+
