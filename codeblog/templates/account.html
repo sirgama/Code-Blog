@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="container">
+       <h2 class="text-center mt-2 fw-bold font-monospace">Account Settings</h2><hr><hr>
+    <div class="card mb-3 m-5" style="max-width: 1000px;">
+        <div class="row g-0">
+            <h5 class="text-center "><hr></h5>
+          <div class="col-md-4 ml-2">
+            <img
+              src="{{ image_file }}"
+              alt="Trendy Pants and Shoes"
+              class="img-fluid rounded-circle m-3"
+              style="height: 250px; width: 250px;"
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body mt-5">
+              <h2 class="card-title text-uppercase fw-bold">Hi, {{current_user.username}}</h2><hr>
+              <h5 class="card-text text-bold">
+                Email: {{current_user.email}}
+              </h5>
+              <p class="card-text">
+                <small class="text-muted fst-italic">Online</small>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <form  method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="row mb-4">
+                <h4 class="text-center mt-5 fw-bold text-uppercase">Update Account Details<hr></h4>
+              <div class="col">
+                <fieldset class="form-group m-2">
+                    <div class="form-outline m-4">
+                        
+                        
+                        {% if form.username.errors %}
+                        {{form.username(class="form-control is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.username(class="form-control")}}
+                        {{form.username.label(class="form-label")}}
+                        {% endif %}
+    
+                        
+                        
+                    </div>
+                    <div class="form-outline m-4">
+                        
+                        {% if form.email.errors %}
+                        {{form.email(class="form-control is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.email(class="form-control")}}
+                        {{form.email.label(class="form-label")}}
+                        {% endif %}
+                    </div>
+                   <div class="form-group m-3">
+                    {{form.picture.label(class="form-label ")}}<br>
+                    {{form.picture(class="form-control-file")}}
+                    {% if form.picture.errors %}
+                    <
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    
+                    {% endif %}
+                   </div>
+                    
+                </fieldset>
+                <div class="form-group m-4">
+                    {{form.submit(class="btn btn-outline-primary text-center")}}
+                   
+                </div>
+              </div>
+              
+            </div> 
+          </form>
+
+      </div>
+   </div>
+
+{% endblock %}
