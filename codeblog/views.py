@@ -3,7 +3,7 @@ import secrets
 from flask  import abort, render_template, redirect, url_for, flash, request
 from codeblog import app, db, mail
 from codeblog.models import User, Blog, Comment, Like, Dislike
-from codeblog.forms import LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm, UpdateForm,CommentForm
+from codeblog.forms import BlogForm, LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm, UpdateForm,CommentForm
 from flask_login import login_required, logout_user, login_user, current_user
 from flask_mail import Message
 
@@ -67,7 +67,7 @@ def logout():
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password reset request', sender='minutepitcher@gmail.com', recipients=[user.email])
+    msg = Message('Password reset request', sender='minuteBloger@gmail.com', recipients=[user.email])
     
     msg.body = f''' To Reset Your Password,visit the following link:
     
@@ -140,3 +140,19 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='user_profiles/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+@app.route('/blog/new', methods=['GET', 'POST'])
+@login_required
+def new_blog():
+    form = BlogForm()
+    
+    if form.validate_on_submit():
+        blog = Blog(title=form.title.data, category=form.category.data , content=form.content.data,  author=current_user )
+        db.session.add(blog)
+        db.session.commit()
+        flash('Blog Created Successfully!', 'success')
+        return redirect(url_for('home'))
+    return render_template('create_blog.html', title='New Blog', form=form, legend='New-Blog')
+
+
+
