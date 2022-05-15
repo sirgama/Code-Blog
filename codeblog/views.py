@@ -179,3 +179,14 @@ def update_blog(blog_id):
 def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     return render_template('blog.html', blog=blog)
+
+@app.route('/blog/<int:blog_id>/delete',methods=['POST'])
+@login_required
+def delete_pitch(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    if blog.author != current_user:
+        abort(403)
+    db.session.delete(blog)
+    db.session.commit()
+    flash('Blog Deleted', 'success')
+    return redirect(url_for('home'))
