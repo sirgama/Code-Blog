@@ -7,9 +7,20 @@ from flask_mail import Message
 
 
 
-@app.route("/home")
+@app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    comments = Comment.query.all()
+    blogs = Blog.query.all()
+    user = User.query.all()
+    users = list(reversed(user))
+    limit = 20
+    coding = Blog.query.filter_by(category = 'Coding').all()
+    resources= Blog.query.filter_by(category = 'Resources').all()
+    trends= Blog.query.filter_by(category = 'Trends').all()
+    codenmoney = Blog.query.filter_by(category = 'Code & Money').all()
+    
+    return render_template('index.html', blogs = blogs,limit=limit, coding=coding, resources=resources, trends=trends, codenmoney=codenmoney, users=users, comments=comments)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
