@@ -14,10 +14,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Registration</title>
+    <title>Login</title>
 </head>
 
 <body>
+    {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock %}
    
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

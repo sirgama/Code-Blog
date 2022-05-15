@@ -31,7 +31,7 @@ def sign_up():
         flash(f"Account created successfully for {form.username.data}!", 'success')
         return redirect(url_for('login'))
         
-    return render_template('signup.html')
+    return render_template('signup.html', form=form)
 
 @app.route("/logout")
 @login_required
