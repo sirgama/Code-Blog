@@ -83,19 +83,19 @@ def send_reset_email(user):
 @app.route("/reset_password", methods=['GET', 'POST'])
 def request_reset():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash('An Email has been sent with instructions on how to reset your password. Check Your Spam as well!', 'info')
     
-    return render_template('reset_request.html', title='Request Password', form=form)
+    return render_template('reset_password.html', title='Request Password', form=form)
 
 @app.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     user = User.verify_reset_token(token)
     if user is None:
@@ -182,7 +182,7 @@ def blog(blog_id):
 
 @app.route('/blog/<int:blog_id>/delete',methods=['POST'])
 @login_required
-def delete_pitch(blog_id):
+def delete_blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     if blog.author != current_user:
         abort(403)
