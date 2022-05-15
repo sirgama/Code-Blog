@@ -174,3 +174,8 @@ def update_pitch(blog_id):
     return render_template('create_blog.html', form=form, legend='Update Blog')
     
 
+@app.route('/blog/<int:blog_id>')
+@login_required
+def pitch(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    return render_template('blog.html', blog=blog)
