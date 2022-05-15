@@ -18,9 +18,7 @@
 </head>
 
 <body>
-    {% block navbar %}
-        {% include 'navbar.html' %}
-    {% endblock %}
+
    
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -28,7 +26,7 @@
                <div class="alert alert-{{ category }} text-center"> {{ message }}</div> 
             {% endfor %}
         {% endif %}
-        {% endwith %}
+    {% endwith %}
     <div class="container d.flex align-items-center jusify-content-center" style="max-width: 30vw;">
     <form  method="POST" action="">
         {{ form.hidden_tag() }}
@@ -74,7 +72,7 @@
                 {{form.submit(class="btn btn-outline-primary text-center")}}
                
             </div>
-            <small class="text-muted m-2"><a href="{{ url_for('reset_request') }}">Forgot Password?</a></small>
+            <small class="text-muted m-2"><a href="{{ url_for('request_reset') }}">Forgot Password?</a></small>
           </div>
           
         </div> 
@@ -99,7 +97,7 @@
             </button>
           </div>
           <div class="text-center mt-4">
-            <p>Dont have an account? <a href="{{ url_for('register') }}">Sign Up</a> </p>
+            <p>Dont have an account? <a href="{{ url_for('sign_up') }}">Sign Up</a> </p>
           </div>  
         
     </div>

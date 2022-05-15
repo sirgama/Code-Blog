@@ -11,24 +11,23 @@ from flask_mail import Message
 def home():
     return render_template('home.html')
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     
-    form = LoginForm()
-    if form.validate_on_submit:
+    form= LoginForm()
+    if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         password = User.query.filter_by(password=form.password.data).first()
         if user and password:
             login_user(user, remember=form.remember.data)
-            flash("Successful Login", 'success')
+            flash('Login Successful!', 'success')
             return redirect(url_for('home'))
         else:
-            flash('Invalid credentials. Check Email or Password', 'danger')
-            
-        
-    return render_template('login.html', form=form)
+            flash('Invalid credentials!', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
     
 
 @app.route("/sign_up", methods=['GET', 'POST'])
