@@ -6,7 +6,7 @@ from codeblog.models import User, Blog, Comment, Like, Dislike
 from codeblog.forms import BlogForm, LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm, UpdateForm,CommentForm
 from flask_login import login_required, logout_user, login_user, current_user
 from flask_mail import Message
-
+from .request import get_quotes
 
 
 @app.route('/home', methods=['GET', 'POST'])
@@ -14,6 +14,7 @@ def home():
     comments = Comment.query.all()
     blogs = Blog.query.all()
     user = User.query.all()
+    randoms = get_quotes()
     users = list(reversed(user))
     limit = 20
     coding = Blog.query.filter_by(category = 'Coding').all()
@@ -21,7 +22,7 @@ def home():
     trends= Blog.query.filter_by(category = 'Trends').all()
     codenmoney = Blog.query.filter_by(category = 'Code & Money').all()
     
-    return render_template('home.html', blogs = blogs,limit=limit, coding=coding, resources=resources, trends=trends, codenmoney=codenmoney, users=users, comments=comments)
+    return render_template('home.html', blogs = blogs,limit=limit,randoms=randoms, coding=coding, resources=resources, trends=trends, codenmoney=codenmoney, users=users, comments=comments)
 
 
 @app.route('/login', methods=['GET', 'POST'])
