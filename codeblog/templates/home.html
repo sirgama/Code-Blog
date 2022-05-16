@@ -35,7 +35,7 @@
   <div class="col m-5 text-center">
    
     {% for blog in blogs %}
-   <div
+   <a href="{{ url_for('blog', blog_id=blog.id) }}"><div
       class="bg-image card w-50 shadow-1-strong mt-3 cardi"
       style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/003.webp');"
       >
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-    </div>
+    </div></a>
     {% endfor %}
 
   </div>
