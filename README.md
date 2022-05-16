@@ -6,9 +6,9 @@
 
 ## Description
 
-A web application that allows users to use that one minute wisely. The users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+An online web blog application that talks about code and things learnt so far. It consumes a quotes API. 
 
-The pitches are organized by category. The app is built on Flask framework.
+TA user can subscribe to a blog and get notified via mail. The app is built on Flask framework.
 
 ## Live preview
 
