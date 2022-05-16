@@ -7,23 +7,23 @@
 
     <div class="container">
       <h2 class="text-center mt-2 fw-bold font-monospace">Account Settings</h2>
-   <div class="card mb-3 m-5" style="max-width: 1000px;">
+   <div class="card mb-3 w-100" style="max-width: 1000px;">
        <div class="row g-0">
            <h5 class="text-center "><hr></h5>
          <div class="col-md-4 ml-2">
            <img
              src="{{ image_file }}"
              alt="{{current_user.username}} profile"
-             class="img-fluid rounded-circle m-3"
-             style="height: 250px; width: 250px;"
+             class="img-fluid rounded-circle m-5"
+             style="height: 100px; width: 100px;"
            />
          </div>
-         <div class="col-md-8">
+         <div class="col-md-5">
            <div class="card-body mt-5">
-             <h2 class="card-title text-uppercase fw-bold">Hi, {{current_user.username}}</h2>
-             <h5 class="card-text text-bold">
+             <h4 class="card-title text-uppercase fw-bold">Hi, {{current_user.username}}</h4>
+             <h6 class="card-text text-bold">
                Email: {{current_user.email}}
-             </h5>
+             </h6>
              <p class="card-text">
                <small class="text-muted fst-italic">Online</small>
              </p>
@@ -34,7 +34,7 @@
        <form  method="POST" action="" enctype="multipart/form-data">
            {{ form.hidden_tag() }}
            <div class="row mb-4">
-               <h4 class="text-center mt-5 fw-bold text-uppercase">Update Account Details<hr></h4>
+               <h5 class="text-center mt-2 fw-bold text-uppercase">Update Account Details<hr></h5>
              <div class="col">
                <fieldset class="form-group m-2">
                    <div class="form-outline m-4">
@@ -95,8 +95,8 @@
   </div>
 
   </div>
-  <div class="col-md-6">
-
+  <div class="col-md-6 mt-5">
+<img class="img-fluid" src="../static/images/undraw_Swipe_profiles_re_tvqm.png" alt="">
 
   </div>
 </div>
