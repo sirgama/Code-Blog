@@ -18,16 +18,25 @@
 </head>
 
 <body>
+<div class="container-fluid">
 
-   
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    <div class="row">
+      <div class="col">
+        <img class="upimg img-fluid mt-5" src="../static/images/undraw_Home_screen_re_640d.png" alt="">
+
+      </div>
+
+
+
+      <div class="col">
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
                <div class="alert alert-{{ category }} text-center"> {{ message }}</div> 
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <div class="container d.flex align-items-center jusify-content-center" style="max-width: 30vw;">
+    <div class="container d.flex align-items-center jusify-content-center" style="max-width: 40vw;">
     <form  method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="row mb-4">
@@ -63,45 +72,35 @@
                     {{form.password.label(class="form-label")}}
                     {% endif %}
                 </div>
-               <div class="form-check">
-                   {{form.remember(class="form-check-input")}}
-                   {{form.remember.label(class="form-check-label")}}
+               <div class="form-check m-3 ">
+                   {{form.remember(class="form-check-input text-center")}}
+                   {{form.remember.label(class="form-check-label text-center")}}
                </div>
             </fieldset>
-            <div class="form-group m-4">
-                {{form.submit(class="btn btn-outline-primary text-center")}}
+            <div class="form-group m-4 text-center">
+                {{form.submit(class="btn btn-primary text-center")}}
                
             </div>
-            <small class="text-muted m-2"><a href="{{ url_for('request_reset') }}">Forgot Password?</a></small>
+            
           </div>
           
         </div> 
       </form>
           <!-- Register buttons -->
-        <div class="text-center">
-            <p>or sign in with:</p>
-            <button type="button" class="btn btn-primary btn-floating mx-1">
-              <i class="fab fa-facebook-f"></i>
-            </button>
         
-            <button type="button" class="btn btn-primary btn-floating mx-1">
-              <i class="fab fa-google"></i>
-            </button>
-        
-            <button type="button" class="btn btn-primary btn-floating mx-1">
-              <i class="fab fa-twitter"></i>
-            </button>
-        
-            <button type="button" class="btn btn-primary btn-floating mx-1">
-              <i class="fab fa-github"></i>
-            </button>
-          </div>
           <div class="text-center mt-4">
             <p>Dont have an account? <a href="{{ url_for('sign_up') }}">Sign Up</a> </p>
+            <p><small class="text-muted m-4 text-center"><a href="{{ url_for('request_reset') }}">Forgot Password?</a></small></p>
           </div>  
-        
     </div>
-    <!-- MDB -->
+      </div>
+    </div>
+
+   
+    
+
+
+    </div><!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
 </body>
 
