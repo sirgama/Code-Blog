@@ -12,14 +12,14 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet" />
     <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/index.css') }}">
-    <title>Document</title>
+    <title>CodeBlog: Welcome</title>
 </head>
 
 <body>
 
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark "style="background-color: rgba(0,0,0,0);">
     <!-- Container wrapper -->
     <div class="container">
       <!-- Navbar brand -->
@@ -78,8 +78,54 @@
   <!-- Navbar -->
 
   <div class="container-fluid">
+<!-- Header section -->
+<header>
+    <!-- Intro settings -->
+    <style>
+      /* Default height for small devices */
+      #intro-example {
+        height: 400px;
+      }
+  
+      /* Height for devices larger than 992px */
+      @media (min-width: 992px) {
+        #intro-example {
+          height: 600px;
+        }
+      }
+    </style>
+  
+   
+  
+    <!-- Background image -->
+    <div
+      id="intro-example"
+      class="p-5 text-center bg-image"
+      style="background-image: url('../static/images/hero1.jpg');"
+    >
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            
+            <h2 class="mb-4">Hi, Welcome to The Code Blog!</h2>
+            <h4 class="mb-4">Home of developer stories</h4>
+            <a
+              class="btn btn-outline-light btn-lg m-2"
+              href="https://www.youtube.com/watch?v=c9B4TPnak1A"
+              role="button"
+              rel="nofollow"
+              target="_blank"
+            >Become A Blogger</a
+            >
+           
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+  </header>
 
-    
   </div>
 
 
