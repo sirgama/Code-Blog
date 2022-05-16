@@ -8,7 +8,7 @@
 
 An online web blog application that talks about code and things learnt so far. It consumes a quotes API. 
 
-TA user can subscribe to a blog and get notified via mail. The app is built on Flask framework.
+A user can subscribe to a blog and get notified via mail. The app is built on Flask framework.
 
 ## Live preview
 
