@@ -3,7 +3,7 @@ import secrets
 from flask  import abort, render_template, redirect, url_for, flash, request
 from codeblog import app, db, mail
 from codeblog.models import User, Blog, Comment, Like, Dislike
-from codeblog.forms import BlogForm, LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm, UpdateForm,CommentForm
+from codeblog.forms import BlogForm, LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm, SubscribeForm, UpdateForm,CommentForm
 from flask_login import login_required, logout_user, login_user, current_user
 from flask_mail import Message
 from .request import get_quotes
@@ -68,7 +68,7 @@ def logout():
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password reset request', sender='minuteBloger@gmail.com', recipients=[user.email])
+    msg = Message('Password reset request', sender='minutepitcher@gmail.com', recipients=[user.email])
     
     msg.body = f''' To Reset Your Password,visit the following link:
     
@@ -78,7 +78,19 @@ def send_reset_email(user):
     
     '''
     mail.send(msg)
+
+def subscription_mail(user):
     
+    msg = Message('Subscription to Code-Blog', sender='minutepitcher@gmail.com', recipients=[user.email])
+    
+    msg.body = f''' Hi {user.username}, You have successfully subscribed to Code Blog.
+    
+    
+    
+    You will receive updates on new posts from the Blog Author
+    
+    '''
+    mail.send(msg)
     
 
 @app.route("/reset_password", methods=['GET', 'POST'])
@@ -182,6 +194,13 @@ def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     
     all_comments = Comment.query.filter_by(blog_id=blog_id).all()
+    form = SubscribeForm()
+    if form.validate_on_submit:
+        user = User(username=form.username.data, email=form.email.data)
+        subscription_mail(user)
+        flash('Subscribed! Check your Mail for more info.', 'info')
+    
+    return render_template('blog', title='Blogging', form=form)
     
     return render_template('blog.html', blog=blog, all_comments=all_comments)
 
