@@ -152,6 +152,7 @@ def save_picture(form_picture):
     
     return picture_fn
 
+
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
@@ -195,6 +196,7 @@ def update_blog(blog_id):
         
     form = BlogForm()
     if form.validate_on_submit():
+        
         blog.title = form.title.data
         blog.content = form.content.data
         db.session.commit()
@@ -203,7 +205,8 @@ def update_blog(blog_id):
     elif request.method == "GET":
         form.title.data = blog.title
         form.content.data = blog.content
-    return render_template('create_blog.html', form=form, legend='Update Blog')
+   
+    return render_template('update_blog.html', form=form, legend='Update Blog')
     
 
 @app.route('/blog/<int:blog_id>', methods=['POST', 'GET'])
