@@ -16,6 +16,7 @@ def root():
 def home():
     comments = Comment.query.all()
     blogs = Blog.query.all()
+    blogs.reverse()
     user = User.query.all()
     randoms = get_quotes()
     users = list(reversed(user))
