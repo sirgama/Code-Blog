@@ -200,7 +200,7 @@ def blog(blog_id):
         subscription_mail(user)
         flash('Subscribed! Check your Mail for more info.', 'info')
     
-        return redirect(url_for('blog'))
+        return redirect(url_for('blog', blog_id=blog_id))
     
     return render_template('blog.html', blog=blog, all_comments=all_comments, form=form)
 
