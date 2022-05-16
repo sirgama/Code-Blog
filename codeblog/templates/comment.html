@@ -24,7 +24,24 @@
           
         </div>
         
-           
+        <div class="card"><small class="text-muted"> 
+            <form  method="POST" action="">
+                <fieldset>
+                {{ form.hidden_tag() }}
+                <div class="form-outline m-4">
+                    {{form.comment(class="form-control")}}
+                {{form.comment.label(class="form-label")}}
+               
+                </div>
+                
+            </fieldset>
+            <div class="form-group mt-4">
+                    {{form.submit(class="btn btn-outline-primary m-3 text-center")}}
+                   
+                </div>
+            </form>
+            <br>
+              </small></div>
         <div class="row">
             {% if blog.author == current_user %}
             <div class="col"><a class="btn btn-info btn-sm m-2" href="{{url_for('update_blog', blog_id=blog.id)}}">Update</a></div>
@@ -35,21 +52,21 @@
                 </form>
             </div>
             {% endif %}
-
-            <small class="text-muted">
-                <ul>
-                {% for blogcomment in allcomments %}
-                   <li>{{blogcomment.comment}}</li>
-                {% endfor %}
-            </ul>
-            </small>
         </div>
+       
       </div>
 
-   
+    
 </div>
 
 
     </div>
+    <small class="text-muted">
+        <ul>
+        {% for comment in allcomments %}
+           <li>{{comment.comment}}</li>
+        {% endfor %}
+    </ul>
+    </small>
 </div>
 {% endblock %}

@@ -39,15 +39,15 @@ class UpdateForm(FlaskForm):
     submit = SubmitField('Update Profile')
     
     
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError('Username already taken. Kindly use another name!')
+    # def validate_username(self, username):
+    #     user = User.query.filter_by(username=username.data).first()
+    #     if user:
+    #         raise ValidationError('Username already taken. Kindly use another name!')
         
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
-            raise ValidationError('Email is already taken, Please use another email!')
+    # def validate_email(self, email):
+    #     user = User.query.filter_by(email=email.data).first()
+    #     if user:
+    #         raise ValidationError('Email is already taken, Please use another email!')
         
 class RequestResetForm(FlaskForm):
     
@@ -63,13 +63,15 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
     
-class CommentForm(FlaskForm):
-    
-    comment = TextAreaField('Write a comment...',validators=[DataRequired()])
-    submit = SubmitField('Post')
-    
+
 class BlogForm(FlaskForm):
     title = StringField('Blog Title', validators=[DataRequired()])
     category = SelectField('Blog Category', choices=[('Coding','Coding'),('Resources','Resources'),('Trends','Trends'),('Code & Money','Code & Money')],validators=[DataRequired()])
     content = TextAreaField('Blog Content', validators=[DataRequired()])
     submit = SubmitField('Go Live')
+    
+    
+class CommentForm(FlaskForm):
+    
+    comment = TextAreaField('Write a comment...',validators=[DataRequired()])
+    submit = SubmitField('Post Comment')

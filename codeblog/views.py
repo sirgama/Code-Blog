@@ -105,11 +105,12 @@ def reset_token(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
         password = form.password.data
-        db.session.commit(password)
+        
+        db.session.commit()
         flash('Password Reset Successfully, You can now login to access account features!', 'success')
         return redirect(url_for('login'))
     
-    return render_template('token_reset.html', title='Request Password', form=form)
+    return render_template('tokenReset.html', title='Request Password', form=form)
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
@@ -178,7 +179,10 @@ def update_blog(blog_id):
 @login_required
 def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
-    return render_template('blog.html', blog=blog)
+    
+    all_comments = Comment.query.filter_by(blog_id=blog_id).all()
+    
+    return render_template('blog.html', blog=blog, all_comments=all_comments)
 
 @app.route('/blog/<int:blog_id>/delete',methods=['POST'])
 @login_required
@@ -190,3 +194,20 @@ def delete_blog(blog_id):
     db.session.commit()
     flash('Blog Deleted', 'success')
     return redirect(url_for('home'))
+
+@app.route('/comment/<int:blog_id>',methods = ['GET','POST'])
+@login_required
+def comment(blog_id):
+    blog=Blog.query.get_or_404(blog_id)
+    form = CommentForm()
+    allComments = Comment.query.filter_by(blog_id = blog_id).all()
+    if form.validate_on_submit():
+        postedComment = Comment(comment=form.comment.data,user_id = current_user.id, blog_id = blog_id)
+        blog_id = blog_id
+        db.session.add(postedComment)
+        db.session.commit()
+        flash('Your comment is posted')
+        
+        return redirect(url_for('comment',blog_id=blog_id))
+
+    return render_template("comment.html",blog=blog, title='React to blog!', form = form,allComments=allComments)

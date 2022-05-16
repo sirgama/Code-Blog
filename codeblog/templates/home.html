@@ -1,7 +1,223 @@
-{% extends 'base.html' %} 
-{% block title %}{% endblock %} 
+{% extends 'base.html' %}
 
 {% block content %}
 
-<h1>Hi you there</h1>
+<div class="container ">
+  <div class="row">
+    <div class="col-md-9">
+  <!-- Tabs navs -->
+<ul class="nav nav-tabs mb-3 m-4 mt-5" id="ex-with-icons" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="ex-with-icons-tab-1" data-mdb-toggle="tab" href="#ex-with-icons-tabs-1" role="tab"
+      aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="fas fa-anchor fa-fw me-2"></i>All bloges</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="ex-with-icons-tab-2" data-mdb-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
+      aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-pie fa-fw me-2"></i>coding</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="ex-with-icons-tab-3" data-mdb-toggle="tab" href="#ex-with-icons-tabs-3" role="tab"
+      aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>resources</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="ex-with-icons-tab-4" data-mdb-toggle="tab" href="#ex-with-icons-tabs-4" role="tab"
+      aria-controls="ex-with-icons-tabs-4" aria-selected="false"><i class="fas fa-heart fa-fw me-2"></i>trends</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="ex-with-icons-tab-5" data-mdb-toggle="tab" href="#ex-with-icons-tabs-5" role="tab"
+      aria-controls="ex-with-icons-tabs-5" aria-selected="false"><i class="fas fa-cogs fa-fw me-2"></i>Well-Being</a>
+  </li>
+</ul>
+<!-- Tabs navs -->
+
+<!-- Tabs content -->
+<div class="tab-content" id="ex-with-icons-content">
+  <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
+    
+    <div class="card mb-4 mt-2 ">
+        {% for blog in blogs %}
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }} <br> <small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="card-body">
+         <a href="{{ url_for('blog', blog_id=blog.id) }}"><h5 class="card-title">{{ blog.title }}</h5></a>
+          <small class="card-text">
+            {{blog.content}}.
+          </small>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="#" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+          <br>
+          <div class="card-footer"><small>Comments:</small></div>
+          
+
+        </small></div>
+        {% endfor %}
+         
+      </div>
+
+    
+   
+  </div>
+  <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
+    {% for blog in coding %}
+    <div class="card mb-4 mt-2 ">
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }} <br> <small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="card-body">
+         <a href="{{ url_for('blog', blog_id=blog.id) }}"><h5 class="card-title">{{ blog.title }}</h5></a>
+          <small class="card-text">
+            {{blog.content}}.
+          </small>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="#" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+          <br>
+          Comments:
+          
+
+        </small></div>
+      </div>
+
+    {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
+    {% for blog in resources %}
+    <div class="card mb-4 mt-2 ">
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }} <br> <small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="card-body">
+         <a href="{{ url_for('blog', blog_id=blog.id) }}"><h5 class="card-title">{{ blog.title }}</h5></a>
+          <small class="card-text">
+            {{blog.content}}.
+          </small>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="#" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+          <br>
+          Comments:
+          
+
+        </small></div>
+      </div>
+
+    {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="ex-with-icons-tabs-4" role="tabpanel" aria-labelledby="ex-with-icons-tab-4">
+    {% for blog in trends %}
+    <div class="card mb-4 mt-2 ">
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }} <br> <small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="card-body">
+         <a href="{{ url_for('blog', blog_id=blog.id) }}"><h5 class="card-title">{{ blog.title }}</h5></a>
+          <small class="card-text">
+            {{blog.content}}.
+          </small>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="#" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+          <br>
+          Comments:
+          
+
+        </small></div>
+      </div>
+
+    {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="ex-with-icons-tabs-5" role="tabpanel" aria-labelledby="ex-with-icons-tab-5">
+    {% for blog in codenmoney %}
+    <div class="card mb-4 mt-2 ">
+        <div class="card-header"> <img
+            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+            alt="{{ blog.author.username }}"
+            class="img-fluid rounded-circle"
+            style="max-height: 50px; width: 50px;"
+            
+          />     {{ blog.author.username }} <br> <small class="text-muted">Posted on {{blog.date_posted.strftime('%Y-%m-%d')}}    Category: {{ blog.category }}</small></div>
+        <div class="card-body">
+         <a href="{{ url_for('blog', blog_id=blog.id) }}"><h5 class="card-title">{{ blog.title }}</h5></a>
+          <small class="card-text">
+            {{blog.content}}.
+          </small>
+      
+          
+        </div>
+        <div class="card-footer"><small class="text-muted">
+          <div class="row">
+            <div class="col" style="height: 10px; width:10px;"><i class="fa-solid fa-thumbs-up" ></i></div>
+            <div class="col"><i class="fa-solid fa-thumbs-down"></i></div>
+            <div class="col"><a href="#" class="btn btn-info btn-rounded btn-sm"> Leave a Comment</a></div>
+          </div>
+          <br>
+          Comments:
+          
+
+        </small></div>
+      </div>
+
+    {% endfor %}
+  </div>
+</div>
+<!-- Tabs content -->
+</div>
+<div class="col-md-3">
+  <h4 class="text-center mt-5">Top blogers</h4><hr>
+  {% for user in users[:limit]: %}
+  <div class="card-header"> <img
+    src="{{ url_for('static', filename='user_profiles/' + user.image_file) }}"
+    alt="{{ user.username }}"
+    class="img-fluid rounded-circle"
+    style="max-height: 30px; max-width:25px;"
+    
+  />    <small> {{ user.username }}</small></div>
+  {% endfor %}
+</div>
+</div>
+</div>
+
+
 {% endblock %}
