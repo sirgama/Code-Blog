@@ -8,7 +8,10 @@ from flask_login import login_required, logout_user, login_user, current_user
 from flask_mail import Message
 from .request import get_quotes
 
-
+@app.route('/')
+def root():
+    
+    return render_template('index.html')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     comments = Comment.query.all()
