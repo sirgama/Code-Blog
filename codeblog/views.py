@@ -52,8 +52,10 @@ def sign_up():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        join_mail(user)
         db.session.add(user)
         db.session.commit()
+        
         flash(f"Account created successfully for {form.username.data}!", 'success')
         return redirect(url_for('login'))
         
@@ -88,6 +90,18 @@ def subscription_mail(user):
     
     
     You will receive updates on new posts from the Blog Author
+    
+    '''
+    mail.send(msg)
+    
+    
+def join_mail(user):
+    
+    msg = Message('Account Created Successfully', sender='minutepitcher@gmail.com', recipients=[user.email])
+    
+    msg.body = f''' Hi {user.username}, Thank you for joining Code-Blog community!.
+    
+    Subscribe to popular blogs and receive updates from the Authors when they post new blogs.
     
     '''
     mail.send(msg)
