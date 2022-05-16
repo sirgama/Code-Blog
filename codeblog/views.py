@@ -207,7 +207,7 @@ def update_blog(blog_id):
     
 
 @app.route('/blog/<int:blog_id>', methods=['POST', 'GET'])
-@login_required
+
 def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     
