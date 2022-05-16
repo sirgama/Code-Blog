@@ -2,6 +2,30 @@
 
 {% block content %}
 
+  <header>
+   
+  
+    <!-- Background image -->
+    <div
+      class="p-5 text-center bg-image"
+      style="
+        background-image: url('../static/images/pexels-christina-morillo-1181325.jpg');
+        height: 50vh;
+      "
+    >
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            
+            <h5 class="mb-3 m-3">{{randoms.quote}}</h5>
+            <p class="mb-3"><small>{{randoms.author}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+  </header>
+</div>
 <div class="container ">
   <div class="row">
     <div class="col-md-9">
@@ -30,7 +54,7 @@
 </ul>
 <!-- Tabs navs -->
 
-<h2>{{randoms.author}}  {{randoms.quote}}</h2>
+<h2></h2>
 
 <!-- Tabs content -->
 <div class="tab-content" id="ex-with-icons-content">
