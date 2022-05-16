@@ -188,21 +188,21 @@ def update_blog(blog_id):
     return render_template('create_blog.html', form=form, legend='Update Blog')
     
 
-@app.route('/blog/<int:blog_id>')
+@app.route('/blog/<int:blog_id>', methods=['POST', 'GET'])
 @login_required
 def blog(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     
     all_comments = Comment.query.filter_by(blog_id=blog_id).all()
     form = SubscribeForm()
-    if form.validate_on_submit:
+    if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         subscription_mail(user)
         flash('Subscribed! Check your Mail for more info.', 'info')
     
-    return render_template('blog', title='Blogging', form=form)
+        return redirect(url_for('blog'))
     
-    return render_template('blog.html', blog=blog, all_comments=all_comments)
+    return render_template('blog.html', blog=blog, all_comments=all_comments, form=form)
 
 @app.route('/blog/<int:blog_id>/delete',methods=['POST'])
 @login_required

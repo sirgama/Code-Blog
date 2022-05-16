@@ -36,13 +36,7 @@
             </div>
             {% endif %}
 
-            <small class="text-muted">
-                <ul>
-                {% for blogcomment in allcomments %}
-                   <li>{{blogcomment.comment}}</li>
-                {% endfor %}
-            </ul>
-            </small>
+            
         </div>
       </div>
 
@@ -51,5 +45,27 @@
 
 
     </div>
+</div>
+<div class="container">
+    <form  method="POST" action="">
+        <fieldset>
+        {{ form.hidden_tag() }}
+        <div class="form-outline m-4">
+            {{form.username(class="form-control")}}
+        {{form.username.label(class="form-label")}}
+       
+        </div>
+        <div class="form-outline m-4">
+            {{form.email(class="form-control")}}
+        {{form.email.label(class="form-label")}}
+       
+        </div>
+        
+    </fieldset>
+    <div class="form-group mt-4">
+            {{form.submit(class="btn btn-outline-primary m-3 text-center")}}
+           
+        </div>
+    </form>
 </div>
 {% endblock %}
