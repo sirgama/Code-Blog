@@ -38,8 +38,8 @@
       <div class="col-md-2">
 
         <div class="row">
-            <p class="text-center">Posted on: {{blog.date_posted.strftime('%Y-%m-%d')}}</p><br>
-            <p class="text-center">Category: {{ blog.category }}</p>
+            <br>
+            <p class="text-center"></p>
             {% if blog.author == current_user %}
             <div class="col"><a class="btn btn-info btn-sm m-2" href="{{url_for('update_blog', blog_id=blog.id)}}">Update</a></div>
             <div class="col">
@@ -55,13 +55,15 @@
 
       </div>
       <div class="col-md-6">
-        
+        <h4 class="mb-3 text-center ">{{ blog.title }}</h4><hr>
+        <small><p class="text-center text-muted">Posted on: {{blog.date_posted.strftime('%Y-%m-%d')}} Category: {{ blog.category }}</p></small>
         <p class="text-center mt-5">{{blog.content}}.</p>
       </div>
       <div class="col-md-4">
 
         <div class="container">
             <form  method="POST" action="">
+                <h4 class="text-center"> Join {{ blog.author.username }} Mailing List!</h4>
                 <fieldset>
                 {{ form.hidden_tag() }}
                 <div class="form-outline m-4">
@@ -87,22 +89,6 @@
   </div>
 
 
-
-
-
-
-
-
-        
            
-        
-      </div>
-
-   
-</div>
-
-
-    </div>
-</div>
-
+ 
 {% endblock %}
