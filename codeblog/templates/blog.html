@@ -1,31 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
 
-<div class="col-md-8">
-    
-    <div class="card mb-4 mt-2 ">
-        <div class="card-header"> <img
-            src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
-            alt="{{ blog.author.username }}"
-            class="img-fluid rounded-circle"
-            style="max-height: 50px; width: 50px;"
-            
-          />     By: {{ blog.author.username }} Posted on: {{blog.date_posted.strftime('%Y-%m-%d')}}</div>
-          <small class="text-muted">Category: {{ blog.category }}</small>
-        <div class="card-body">
-          <h5 class="card-title">{{ blog.title }}</h5>
-          <p class="card-text">
-            {{blog.content}}.
-          </p>
-      
-          
-        </div>
+<header>
+
+  
+    <!-- Background image -->
+    <div
+      class="p-5 text-center bg-image"
+      style="
+        background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+        height: 70vh;
         
-           
+      "
+    >
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <h1 class="mb-3">{{ blog.title }}</h1>
+            <h4 class="mb-3"></h4>
+            <p><img
+                src="{{ url_for('static', filename='user_profiles/' + blog.author.image_file) }}"
+                alt="{{ blog.author.username }}"
+                class="img-fluid rounded-circle"
+                style="max-height: 50px; width: 50px;"
+                
+              />     By: {{ blog.author.username }} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+  </header>
+
+
+  <div class="row mt-5">
+      <div class="col-md-2">
+
         <div class="row">
+            <p class="text-center">Posted on: {{blog.date_posted.strftime('%Y-%m-%d')}}</p><br>
+            <p class="text-center">Category: {{ blog.category }}</p>
             {% if blog.author == current_user %}
             <div class="col"><a class="btn btn-info btn-sm m-2" href="{{url_for('update_blog', blog_id=blog.id)}}">Update</a></div>
             <div class="col">
@@ -38,6 +52,50 @@
 
             
         </div>
+
+      </div>
+      <div class="col-md-6">
+        
+        <p class="text-center mt-5">{{blog.content}}.</p>
+      </div>
+      <div class="col-md-4">
+
+        <div class="container">
+            <form  method="POST" action="">
+                <fieldset>
+                {{ form.hidden_tag() }}
+                <div class="form-outline m-4">
+                    {{form.username(class="form-control")}}
+                {{form.username.label(class="form-label")}}
+               
+                </div>
+                <div class="form-outline m-4">
+                    {{form.email(class="form-control")}}
+                {{form.email.label(class="form-label")}}
+               
+                </div>
+                
+            </fieldset>
+            <div class="form-group text-center mt-4">
+                    {{form.submit(class="btn btn-outline-primary m-3 text-center")}}
+                   
+                </div>
+            </form>
+        </div>
+
+      </div>
+  </div>
+
+
+
+
+
+
+
+
+        
+           
+        
       </div>
 
    
@@ -46,26 +104,5 @@
 
     </div>
 </div>
-<div class="container">
-    <form  method="POST" action="">
-        <fieldset>
-        {{ form.hidden_tag() }}
-        <div class="form-outline m-4">
-            {{form.username(class="form-control")}}
-        {{form.username.label(class="form-label")}}
-       
-        </div>
-        <div class="form-outline m-4">
-            {{form.email(class="form-control")}}
-        {{form.email.label(class="form-label")}}
-       
-        </div>
-        
-    </fieldset>
-    <div class="form-group mt-4">
-            {{form.submit(class="btn btn-outline-primary m-3 text-center")}}
-           
-        </div>
-    </form>
-</div>
+
 {% endblock %}
