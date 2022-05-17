@@ -58,6 +58,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) 
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
     comment = db.Column(db.String(100))
+    
 
     def __repr__(self):
             return f"Comment('{self.comment}')"
@@ -73,3 +74,4 @@ class Dislike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'),nullable=False)
+    
